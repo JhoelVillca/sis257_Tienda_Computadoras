@@ -1,7 +1,7 @@
 # Tienda de Computadoras
 
 ##  Descripción del Proyecto
-Este proyecto consiste en el desarrollo de un sistema de gestión integral para una tienda de hardware y computadoras. El objetivo principal es administrar de manera eficiente, segura y escalable la información relacionada con clientes, vendedores, inventario físico y transacciones financieras.
+Este proyecto consiste en el desarrollo de un sistema de gestión integral para una tienda de hardware y computadoras. El objetivo es administrar de manera eficiente, segura y escalable la información relacionada con clientes, vendedores, inventario físico y transacciones financieras.
 
 El sistema permite realizar operaciones como registro de usuarios, control de stock de componentes, trazabilidad absoluta de ventas por empleado, y administración centralizada del negocio. Está diseñado para la gestión física en tiendas.
 
