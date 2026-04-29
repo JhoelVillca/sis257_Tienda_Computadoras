@@ -1,26 +1,46 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { CreateClienteDto } from './dto/create-cliente.dto';
-import { UpdateClienteDto } from './dto/update-cliente.dto';
-
-@Injectable()
+import { UpdateClienteDto } from './dto/update-cliente.dto'; 
+import { Cliente } from './entities/cliente.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { In, Repository } from 'typeorm';
+ 
+@Injectable()  
 export class ClienteService {
-  create(createClienteDto: CreateClienteDto) {
-    return 'This action adds a new cliente';
-  }
+  constructor(@InjectRepository(Cliente) private clienteRepository: Repository<Cliente>) {}
 
-  findAll() {
-    return `This action returns all cliente`;
-  }
+  async create(createClienteDto: CreateClienteDto): Promise<Cliente> {
+    let cliente = await this.clienteRepository.findOneBy({
+      usuario_id: createClienteDto.usuario_id.trim(),   
+      nombre_completo: createClienteDto.nombre_completo.trim(), 
+      telefono: createClienteDto.telefono.trim(),
+      nit_facturacion: createClienteDto.nit_facturacion.trim(), 
+    });  
+    if (cliente) throw new ConflictException('El cliente ya existe');
 
-  findOne(id: number) {
-    return `This action returns a #${id} cliente`;
-  }
+    cliente = new Cliente();   
+    Object.assign(cliente, createClienteDto);
+    return this.clienteRepository.save(cliente);
+  } 
 
-  update(id: number, updateClienteDto: UpdateClienteDto) {
-    return `This action updates a #${id} cliente`;
-  }
+  asyncfindAll(): Promise<Cliente[]> {
+    return this.clienteRepository.find({ order: { nombre_completo: 'ASC' } });
+  }            
+  
+  async findOne(id: number): Promise<Cliente> {
+    const cliente = await this.clienteRepository.findOneBy({ id });
+    if (!cliente) throw new NotFoundException('El cliente no existe'); 
+    return cliente;      
+  }                        
 
-  remove(id: number) {
-    return `This action removes a #${id} cliente`;
+  async update(id: number, updateClienteDto: UpdateClienteDto): Promise<Cliente> {
+    const cliente = await this.findOne(id);
+    Object.assign(cliente, updateClienteDto);
+    return this.clienteRepository.save(cliente);
+  }        
+   
+  async remove(id: number): Promise<Cliente> {
+    const cliente = await this.findOne(id);
+    return this.clienteRepository.softRemove(cliente);
   }
 }
