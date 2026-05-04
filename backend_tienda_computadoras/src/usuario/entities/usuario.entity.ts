@@ -1,1 +1,25 @@
-export class Usuario {}
+import { DeleteDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
+
+@Entity('usuarios')
+export class Usuario {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column({ type: 'varchar', length: 150, unique: true })
+  email: string;
+
+  @Column({ type: 'varchar', length: 255 })
+  password: string;
+
+  @Column({ type: 'varchar', length: 20 })
+  rol: string;
+
+  @CreateDateColumn({ name: 'fecha_registro', type: 'timestamp' })
+  fecha_registro: Date;
+  
+  @DeleteDateColumn({ name: 'fecha_eliminacion', type: 'timestamp' })
+  fecha_eliminacion: Date;
+}
+

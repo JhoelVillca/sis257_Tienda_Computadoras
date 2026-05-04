@@ -22,7 +22,7 @@ export class Cliente {
   nombre_completo: string | undefined;
 
   @Column('varchar', { length: 20 })
-  telefono: number | undefined;
+  telefono: string | undefined;
 
   @Column('varchar', { length: 50 })
   nit_facturacion: number | undefined;
