@@ -1,4 +1,6 @@
+import { DeleteDateColumn } from 'typeorm';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+
 
 @Entity('usuarios')
 export class Usuario {
@@ -16,4 +18,8 @@ export class Usuario {
 
   @CreateDateColumn({ name: 'fecha_registro', type: 'timestamp' })
   fecha_registro: Date;
+  
+  @DeleteDateColumn({ name: 'fecha_eliminacion', type: 'timestamp' })
+  fecha_eliminacion: Date;
 }
+
