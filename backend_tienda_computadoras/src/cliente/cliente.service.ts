@@ -11,19 +11,19 @@ export class ClienteService {
 
   async create(createClienteDto: CreateClienteDto): Promise<Cliente> {
     let cliente = await this.clienteRepository.findOneBy({
-      usuario_id: createClienteDto.usuario_id.trim(),   
-      nombre_completo: createClienteDto.nombre_completo.trim(), 
-      telefono: createClienteDto.telefono.trim(),
-      nit_facturacion: createClienteDto.nit_facturacion.trim(), 
+      usuario_id: createClienteDto.usuario_id?.trim(),   
+      nombre_completo: createClienteDto.nombre_completo?.trim(), 
+      telefono: createClienteDto.telefono?.trim(),
+      nit_facturacion: createClienteDto.nit_facturacion?.trim(), 
     });  
     if (cliente) throw new ConflictException('El cliente ya existe');
-
-    cliente = new Cliente();   
+     
+    cliente = new Cliente();    
     Object.assign(cliente, createClienteDto);
     return this.clienteRepository.save(cliente);
   } 
 
-  asyncfindAll(): Promise<Cliente[]> {
+  async findAll(): Promise<Cliente[]> {
     return this.clienteRepository.find({ order: { nombre_completo: 'ASC' } });
   }            
   

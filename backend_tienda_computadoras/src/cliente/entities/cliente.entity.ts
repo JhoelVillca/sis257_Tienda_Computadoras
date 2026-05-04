@@ -13,19 +13,19 @@ import {
 @Entity('cliente')
 export class Cliente {
   @PrimaryGeneratedColumn('uuid')
-  id: string | undefined;
+  id: number | undefined;
 
   @Column('uuid')
-  usuario_id: string | undefined;
+  usuario_id: number | undefined;
 
   @Column('varchar', { length: 30 })
   nombre_completo: string | undefined;
 
   @Column('varchar', { length: 20 })
-  telefono: string | undefined;
+  telefono: number | undefined;
 
   @Column('varchar', { length: 50 })
-  nit_facturacion: string | undefined;
+  nit_facturacion: number | undefined;
 
   @CreateDateColumn({ name: 'fecha_creacion' })
   fechaCreacion: Date | undefined;

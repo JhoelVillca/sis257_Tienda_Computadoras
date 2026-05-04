@@ -8,7 +8,7 @@ export class CreateClienteDto {
   @IsString({ message: 'El usuario_id debe ser una cadena de texto' })
   @MaxLength(50, { message: 'El usuario_id no puede tener mas de 50 caracteres' })
   @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
-  readonly usuario_id: string | undefined ;
+  readonly usuario_id: string;
                      
   @ApiProperty()
   @IsNotEmpty({ message: 'El nombre_completo es obligatorio' })
@@ -22,7 +22,7 @@ export class CreateClienteDto {
   @IsString({ message: 'El telefono debe ser una cadena de texto' })
   @MaxLength(100, { message: 'El telefono no puede tener mas de 100 caracteres' })
   @Transform(({ value }): string | undefined => (typeof value === 'string' ? value.trim() : value))
-  readonly telefono: string | undefined;  
+  readonly telefono: string | undefined ;  
                   
   @ApiProperty()
   @IsNotEmpty({ message: 'El nit_facturacion es obligatorio' })
