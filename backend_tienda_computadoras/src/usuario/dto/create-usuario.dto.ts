@@ -10,7 +10,7 @@ export class CreateUsuarioDto {
   @Transform(({ value }): string | undefined =>
     typeof value === 'string' ? value.trim() : value,
   )
-  readonly email: string | undefined;
+  readonly email: string;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'La contraseña es obligatoria' })
@@ -21,7 +21,7 @@ export class CreateUsuarioDto {
   @Transform(({ value }): string | undefined =>
     typeof value === 'string' ? value.trim() : value,
   )
-  readonly password: string | undefined;
+  readonly password: string;
 
   @ApiProperty()
   @IsNotEmpty({ message: 'El rol es obligatorio' })
@@ -30,5 +30,5 @@ export class CreateUsuarioDto {
   @Transform(({ value }): string | undefined =>
     typeof value === 'string' ? value.trim() : value,
   )
-  readonly rol: string | undefined;
+  readonly rol: string;
 }
